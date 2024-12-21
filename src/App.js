@@ -7,9 +7,9 @@ import "./style.css"
 const App = () => {
   return (
     <div className="todo-container">
-      <Header/>
+      <Header title="Todoie App"/>
       <TodoItem text="Eat"/>
-      <TodoItem text="Code"/>
+      <TodoItem completed={true} text="Code"/>
       <TodoItem text="Play"/>
       <TodoItem text="Study"/>
       <TodoItem text="Sleep Again"/>
