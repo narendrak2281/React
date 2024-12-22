@@ -6,7 +6,14 @@ const Timer = () => {
 
     useEffect(() => {
         // Mounted
+        console.log("Adding new interval")
         const timer = setInterval(() => setTime(time + 1), 1000)
+
+        return function () {
+        console.log("Clear old interval",timer)
+            clearInterval(timer);
+        };
+
     }, [time]);
 
     return (
