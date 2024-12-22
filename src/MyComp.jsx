@@ -15,7 +15,11 @@ const MyComponent = () => {
 
     useEffect(() => {
         console.log("Count got updated",count)
-    }, [count, count2])
+
+        return function() {
+            console.log("Returning count",count)
+        };
+    }, [count])
 
 
     return (
