@@ -12,12 +12,13 @@ const App = () => {
   return (
     <div className="todo-container">
       <CounterComponent/>
-      <Header title="Todoie App"/>
+      <CounterComponent/>
+      {/* <Header title="Todoie App"/>
       <TodoItem text="Eat"/>
       <TodoItem completed={true} text="Code"/>
       <TodoItem text="Play"/>
       <TodoItem text="Study"/>
-      <TodoItem text="Sleep Again"/>
+      <TodoItem text="Sleep Again"/> */}
       <Button/>
     </div>
   );
