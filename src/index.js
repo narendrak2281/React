@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -39,12 +39,26 @@ const Settings = () => {
   );
 };
 
+const SayUser = () => {
+  const params = useParams();
+
+  console.log("Params :",params);
+  return (
+    <div>
+      <h1>Your name is {params.userId} </h1>
+    </div>
+  );
+};
+
 root.render(
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About/>} />
+
+        <Route path="/user/:userId" element={<SayUser/>} />
+
         <Route path="account" >
           <Route path="profile" element={<Profile/>} />
           <Route path="settings" element={<Settings/>} />
