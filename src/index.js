@@ -31,13 +31,24 @@ const Profile = () => {
   );
 };
 
+const Settings = () => {
+  return (
+    <div>
+      <h1>Settings Page</h1>
+    </div>
+  );
+};
+
 root.render(
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About/>} />
-        <Route path="/account/profile" element={<Profile/>} />
+        <Route path="account" >
+          <Route path="profile" element={<Profile/>} />
+          <Route path="settings" element={<Settings/>} />
+        </Route>
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
