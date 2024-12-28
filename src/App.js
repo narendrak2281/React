@@ -1,13 +1,12 @@
-import { Routes, Route } from 'react-router-dom';
-import './App.css';
+import { Routes, Route } from "react-router-dom";
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   return (
-    <div className="App">
+    <div className="container">
       <h1>Meme generator</h1>
-      <Routes>
-        
-      </Routes>
+      <Routes></Routes>
     </div>
   );
 }
