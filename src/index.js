@@ -1,16 +1,41 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 
-import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  useParams,
+  data,
+  NavLink,
+} from "react-router-dom";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 const Home = () => {
+  const [posts, setPost] = useState([]);
+
+  useEffect(() => {
+    fetch("https://jsonplaceholder.typicode.com/posts")
+      .then((data) => data.json())
+      .then((data) => setPost(data));
+  }, []);
+
   return (
     <div>
-      <h1>Home Page</h1>
+      <div className="post-container">
+        {posts.map((post) => (
+          <NavLink
+            className="post-titles"
+            style={{ display: "block" }}
+            to={`/post/${post.id}`}
+          >
+            {post.title}
+          </NavLink>
+        ))}
+      </div>
     </div>
   );
 };
@@ -42,10 +67,33 @@ const Settings = () => {
 const SayUser = () => {
   const params = useParams();
 
-  console.log("Params :",params);
+  console.log("Params :", params);
   return (
     <div>
       <h1>Your name is {params.userId} </h1>
+    </div>
+  );
+};
+
+const PostPage = () => {
+  const params = useParams();
+  const [data, setData] = useState(null);
+
+  console.log("Params", params);
+
+  useEffect(() => {
+    fetch(`https://jsonplaceholder.typicode.com/posts/${params.postId}`)
+      .then((data) => data.json())
+      .then((data) => setData(data));
+  }, []);
+
+  console.log("Data", data);
+
+  if (data === null) return <p>Loading...</p>;
+  return (
+    <div>
+      <h1>{data.title}</h1>
+      <p>{data.body}</p>
     </div>
   );
 };
@@ -55,13 +103,14 @@ root.render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About/>} />
+        <Route path="/about" element={<About />} />
 
-        <Route path="/user/:userId" element={<SayUser/>} />
+        <Route path="/user/:userId" element={<SayUser />} />
+        <Route path="/post/:postId" element={<PostPage />} />
 
-        <Route path="account" >
-          <Route path="profile" element={<Profile/>} />
-          <Route path="settings" element={<Settings/>} />
+        <Route path="account">
+          <Route path="profile" element={<Profile />} />
+          <Route path="settings" element={<Settings />} />
         </Route>
       </Routes>
     </BrowserRouter>
